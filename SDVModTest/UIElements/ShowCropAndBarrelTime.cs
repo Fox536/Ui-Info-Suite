@@ -133,9 +133,16 @@ namespace UIInfoSuite.UIElements
                     }
                     else
                     {
-                        int hours = _currentTile.minutesUntilReady / 60;
+						int totalDays = (int)Math.Floor(_currentTile.minutesUntilReady / 60.0 / 24.0);
+						int hours = _currentTile.minutesUntilReady / 60 % 24;
                         int minutes = _currentTile.minutesUntilReady % 60;
-                        if (hours > 0)
+						if (totalDays > 0)
+							hoverText.Append(totalDays).Append(" ")
+								.Append(_helper.SafeGetString(
+									LanguageKeys.DaysToMature))
+								.Append(": ");
+
+						if (hours > 0)
                             hoverText.Append(hours).Append(" ")
                                 .Append(_helper.SafeGetString(
                                     LanguageKeys.Hours))
